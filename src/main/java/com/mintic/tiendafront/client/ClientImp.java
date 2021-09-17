@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class ClientImp implements IClientTienda {
 
-	private static final String URL = "http://localhost:8090/";
+	private static final String URL = "http://localhost:8090/tiendagenerica/v1";
 
 	@Autowired
 	private WebClient.Builder webClient;
@@ -26,11 +26,16 @@ public class ClientImp implements IClientTienda {
 	@Override
 	public int login(LoginDto loginDto) {
 		try {
+			/*
+			 * aqui nos conectamos al back  directamente al controlador donde estan las rutas 
+			 * el back espera recibir un dto  por eso enviamos el dto login dto
+			  * */
 
-			Mono<Integer> response = webClient.build().post().uri(URL + "tiendagenerica/v1/loginclient")
+			Mono<Integer> response = webClient.build().post().uri(URL + "/loginclient")
 					.accept(MediaType.APPLICATION_JSON).body(Mono.just(loginDto), LoginDto.class).retrieve()
 					.bodyToMono(Integer.class);
 
+			//Aqui se captura la respuesta del back 
 			return response.block();
 
 		} catch (WebClientResponseException e) {
@@ -45,7 +50,7 @@ public class ClientImp implements IClientTienda {
 	public List<UsuarioResponse> getUsuarios() {
 
 		try {
-			Mono<List> response = webClient.build().get().uri(URL + "/tiendagenerica/v1/usuarios").retrieve()
+			Mono<List> response = webClient.build().get().uri(URL + "/usuarios").retrieve()
 					.bodyToMono(List.class);
 
 			return response.block();
@@ -62,7 +67,7 @@ public class ClientImp implements IClientTienda {
 		try {
 
 			UsuarioResponse u = null;
-			Mono<UsuarioResponse> response = webClient.build().post().uri(URL + "tiendagenerica/v1/usuarios")
+			Mono<UsuarioResponse> response = webClient.build().post().uri(URL + "/usuarios")
 					.body(Mono.just(usuarioDto), UsuarioResponse.class).retrieve().bodyToMono(UsuarioResponse.class);
 
 			u = response.block();
@@ -81,7 +86,7 @@ public class ClientImp implements IClientTienda {
 		// TODO Auto-generated method stub
 		try {
 
-			Mono<UsuarioResponse> response = webClient.build().get().uri(URL + "/tiendagenerica/v1/usuarios/" + id)
+			Mono<UsuarioResponse> response = webClient.build().get().uri(URL + "/usuarios/" + id)
 					.retrieve().bodyToMono(UsuarioResponse.class);
 
 			return response.block();
@@ -96,7 +101,7 @@ public class ClientImp implements IClientTienda {
 	public int borrarUsuario(Long id) {
 		try {
 
-			Mono<Integer> response = webClient.build().delete().uri(URL + "/tiendagenerica/v1/usuarios/" + id)
+			Mono<Integer> response = webClient.build().delete().uri(URL + "/usuarios/" + id)
 					.retrieve().bodyToMono(Integer.class);
 
 			return response.block();
@@ -111,7 +116,7 @@ public class ClientImp implements IClientTienda {
 	@Override
 	public List<TipoDocumento> getTipoDocumento() {
 		try {
-			Mono<List> response = webClient.build().get().uri(URL + "/tiendagenerica/v1/tipodocumento").retrieve()
+			Mono<List> response = webClient.build().get().uri(URL + "/tipodocumento").retrieve()
 					.bodyToMono(List.class);
 
 			return response.block();

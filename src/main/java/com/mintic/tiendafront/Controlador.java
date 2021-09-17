@@ -29,7 +29,7 @@ public class Controlador {
 	public String menu() {
 		return "menu";
 	}
-
+	
 	@PostMapping("/login")
 	public String login(Model model, LoginDto loginDto) {
 		int validLogin = clienteTienda.login(loginDto);
