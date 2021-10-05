@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head"></head>
+<body>
+	<header th:replace="plantilla/template:: header"></header>
+	<form method="POST" th:action="@{/producto}"
+		enctype="multipart/form-data">
+		<div class="form-group mt-3">
+			<label for="file">Select a CSV file</label> <input type="file"
+				name="file" class="form-control-file" id="file" accept=".csv">
+		</div>
+		<button type="submit" class="btn btn-primary">Importar
+			producto</button>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>proveedor</th>
+					<th>iva compra</th>
+					<th>nombre</th>
+					<th>precio compra</th>
+					<th>precio venta</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="u:${producto}">
+					<td scope="row" th:text="${u.idProveedor}"></td>
+					<td th:text="${u.ivaCompra}"></td>
+					<td th:text="${u.nombre}"></td>
+					<td th:text="${u.precioCompra}"></td>
+					<td th:text="${u.precioVenta}"></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+
+
+	</form>
+</body>
+</html>

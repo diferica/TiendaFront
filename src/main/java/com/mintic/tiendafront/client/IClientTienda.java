@@ -2,6 +2,8 @@ package com.mintic.tiendafront.client;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.mintic.tiendafront.dto.Usuario;
 import com.mintic.tiendafront.dto.UsuarioResponse;
 import com.mintic.tiendafront.dto.LoginDto;
@@ -20,4 +22,6 @@ public interface IClientTienda {
 	public int borrarUsuario(Long id);
 
 	public List<TipoDocumento> getTipoDocumento();
+	
+	public ResponseEntity<?> loginCliente(LoginDto loginDto);
 }

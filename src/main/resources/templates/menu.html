@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head">
+</head>
+<script type="text/javascript">
+	$(window).on("load", function() {
+
+		var idSesion = $("#idSesion").text();
+		localStorage.setItem("id", idSesion);
+		localStorage.getItem('id');
+
+		console.log("---->" + idSesion);
+
+	});
+</script>
+
+<body>
+	<header th:replace="plantilla/template:: header"></header>
+
+		<div th:if="${usuarioIngreso !=null}" id="idSesion"
+		th:text="${usuarioIngreso.id}"></div>
+	<div th:unless="${usuarioIngreso}">
+		<span class="xxx">Something else</span>
+	</div>
+	
+	
+
+</body>
+</html>

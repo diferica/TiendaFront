@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head">
+
+</head>
+<body>
+	<div class="container">
+
+		<div class="row">
+			<h1>Login Usuario</h1>
+			<form th:action="@{/login}" th:object="${loginDto}" method="post">
+
+				<div class=" col-xl-4 col-lg-3 col-md-4 col-sm-6" id="formulario">
+					<div class="form-group">
+						<label for="Usuario">Usuario</label> <input type="text"
+							class="form-control" name="nombreUsuario" id="Usuario"> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('nombreUsuario')}"
+							th:errors="*{nombreUsuario}"></small>
+
+					</div>
+
+					<div class="form-group">
+						<label for="pwd">Password:</label> <input type="password"
+							class="form-control" name="password" id="pwd"> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+
+					</div>
+					<p th:text="${error}"></p>
+					<br>
+					<button type="submit" class="btn btn-primary">Ingresar</button>
+					<br> <br>
+
+				</div>
+
+					<div th:object="${loginDto}" th:remove="tag">
+    <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+        <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+    </ul> 
+		</div>
+
+		</form>
+
+	</div>
+	</div>
+</body>
+</html>

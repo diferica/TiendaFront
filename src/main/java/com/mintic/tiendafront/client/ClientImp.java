@@ -1,9 +1,13 @@
 package com.mintic.tiendafront.client;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -27,15 +31,15 @@ public class ClientImp implements IClientTienda {
 	public int login(LoginDto loginDto) {
 		try {
 			/*
-			 * aqui nos conectamos al back  directamente al controlador donde estan las rutas 
-			 * el back espera recibir un dto  por eso enviamos el dto login dto
-			  * */
+			 * aqui nos conectamos al back directamente al controlador donde estan las rutas
+			 * el back espera recibir un dto por eso enviamos el dto login dto
+			 */
 
 			Mono<Integer> response = webClient.build().post().uri(URL + "/loginclient")
 					.accept(MediaType.APPLICATION_JSON).body(Mono.just(loginDto), LoginDto.class).retrieve()
 					.bodyToMono(Integer.class);
 
-			//Aqui se captura la respuesta del back 
+			// Aqui se captura la respuesta del back
 			return response.block();
 
 		} catch (WebClientResponseException e) {
@@ -50,8 +54,7 @@ public class ClientImp implements IClientTienda {
 	public List<UsuarioResponse> getUsuarios() {
 
 		try {
-			Mono<List> response = webClient.build().get().uri(URL + "/usuarios").retrieve()
-					.bodyToMono(List.class);
+			Mono<List> response = webClient.build().get().uri(URL + "/usuarios").retrieve().bodyToMono(List.class);
 
 			return response.block();
 		} catch (Exception e) {
@@ -86,8 +89,8 @@ public class ClientImp implements IClientTienda {
 		// TODO Auto-generated method stub
 		try {
 
-			Mono<UsuarioResponse> response = webClient.build().get().uri(URL + "/usuarios/" + id)
-					.retrieve().bodyToMono(UsuarioResponse.class);
+			Mono<UsuarioResponse> response = webClient.build().get().uri(URL + "/usuarios/" + id).retrieve()
+					.bodyToMono(UsuarioResponse.class);
 
 			return response.block();
 		} catch (Exception e) {
@@ -101,8 +104,8 @@ public class ClientImp implements IClientTienda {
 	public int borrarUsuario(Long id) {
 		try {
 
-			Mono<Integer> response = webClient.build().delete().uri(URL + "/usuarios/" + id)
-					.retrieve().bodyToMono(Integer.class);
+			Mono<Integer> response = webClient.build().delete().uri(URL + "/usuarios/" + id).retrieve()
+					.bodyToMono(Integer.class);
 
 			return response.block();
 
@@ -116,8 +119,7 @@ public class ClientImp implements IClientTienda {
 	@Override
 	public List<TipoDocumento> getTipoDocumento() {
 		try {
-			Mono<List> response = webClient.build().get().uri(URL + "/tipodocumento").retrieve()
-					.bodyToMono(List.class);
+			Mono<List> response = webClient.build().get().uri(URL + "/tipodocumento").retrieve().bodyToMono(List.class);
 
 			return response.block();
 		} catch (Exception e) {
@@ -125,6 +127,28 @@ public class ClientImp implements IClientTienda {
 			return null;
 		}
 
+	}
+
+	@Override
+	public ResponseEntity<?> loginCliente(LoginDto loginDto) {
+		Map<String, Object> responseClient = new HashMap<>();
+		
+		try {
+
+			UsuarioResponse u = null;
+			Mono<ResponseEntity> response = webClient.build().post().uri(URL + "/login")
+					.body(Mono.just(loginDto), LoginDto.class).retrieve().bodyToMono(ResponseEntity.class);
+
+			responseClient= (Map<String, Object>) response.block();
+			
+			return (ResponseEntity<?>) responseClient;
+
+		} catch (WebClientResponseException e) {
+			responseClient.put("cliente",e.getMessage());
+
+			return new ResponseEntity<>(responseClient, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 
 }

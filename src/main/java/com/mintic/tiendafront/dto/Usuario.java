@@ -1,19 +1,30 @@
 package com.mintic.tiendafront.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+
 public class Usuario {
 
 	private Long id;
-
+	
+	
+	@NotNull(message="El tipo de documento es obligatorio")
 	private Long idTipoDocumento;
 
+	@NotEmpty(message="El numero de documento es obligatorio")
 	private String numeroDocumento;
 
+	@NotEmpty(message="El nombre es obligatorio")
 	private String nombre;
 
+	@NotEmpty(message="El email es obligatorio")
 	private String email;
 
+	@NotEmpty(message="El password es obligatorio")
 	private String password;
 
+	@NotEmpty(message="El nombre de usuario es obligatorio")
 	private String nombreUsuario;
 
 	public String getEmail() {
