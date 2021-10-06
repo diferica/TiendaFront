@@ -10,7 +10,7 @@
 
 		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
 
-			<form method="post"  class="form-inline" th:action="@{/cliente}" th:object="${cliente}">
+			<form method="post"  th:action="@{/clienteDocumento}" th:object="${cliente}">
 
 				<div class="form-group">
 					<label for="Usuario">Numero Documento :</label> <input type="text"
@@ -29,7 +29,7 @@
 			<table class="table">
 				<thead>
 					<tr style="text-align: right;">
-						<th colspan="8"><a class="btn btn-success">Nuevo Cliente</a> </th>
+						<th colspan="9"><a class="btn btn-success"  th:href="@{/clienteNuevo}">Nuevo Cliente</a> </th>
 					</tr>
 					<tr>
 						<th>#</th>

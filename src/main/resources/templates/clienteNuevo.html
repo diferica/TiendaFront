@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head">
+</head>
+
+
+<body>
+	<header th:replace="plantilla/template:: header"></header>
+
+	<div class="container">
+		<h1>Crear cliente</h1>
+		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
+			<form method="post" th:action="@{/cliente}" th:object="${cliente}">
+				<div class="form-group">
+					<label>Tipo Documento :</label> <select name="idTipoDocumento"
+						class="form-select">
+						<option value="">Seleccionar</option>
+						<option th:each="tdo:${tipoDocumento}" th:value="${tdo.id}"
+							th:text="${tdo.tipo}"
+							th:selected=" ${clienteEditar.id != null} ? ${tdo.id}==${clienteEditar.idTipoDocumento.id}">
+
+						</option>
+
+					</select>
+				</div>
+
+				<div class="form-group">
+					<input type="hidden" name="id" th:value="${clienteEditar.id}">
+
+					<label for="numero"> Numero:</label><input type="text"
+						name="numeroDocumento" id="numero"
+						th:value="${clienteEditar.numeroDocumento}" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label>Nombre:</label><input type="text" name="nombre"
+						class="form-control" th:value="${clienteEditar.nombre}" />
+				</div>
+				<div class="form-group">
+					<label>Direccion:</label><input type="text" name="direccion"
+						class="form-control" th:value="${clienteEditar.direccion}" />
+				</div>
+
+				<div class="form-group">
+					<label>Email:</label><input type="text" name="email"
+						class="form-control" th:value="${clienteEditar.email}" />
+				</div>
+
+				<div class="form-group">
+					<label>Telefono:</label><input type="text" name="telefono"
+						class="form-control" th:value="${clienteEditar.telefono}" />
+				</div>
+
+
+				<br>
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</form>
+
+			<div th:object="${cliente}" th:remove="tag">
+				<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+					role="alert">
+					<li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+				</ul>
+
+			</div>
+
+
+		</div>
+		<br> <br>
+
+	</div>
+
+</body>
+</html>

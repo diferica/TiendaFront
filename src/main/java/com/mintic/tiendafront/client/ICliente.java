@@ -3,6 +3,7 @@ package com.mintic.tiendafront.client;
 import java.util.List;
 
 import com.mintic.tiendafront.dto.Cliente;
+import com.mintic.tiendafront.dto.ClienteDocumento;
 import com.mintic.tiendafront.dto.ClienteResponse;
 
 public interface ICliente {
@@ -12,7 +13,7 @@ public interface ICliente {
 
 	public ClienteResponse buscarCliente(Long id);
 
-	public ClienteResponse buscarClienteDocumento(Cliente clienteDto);
+	public ClienteResponse buscarClienteDocumento(ClienteDocumento clienteDto);
 
-	public int borrarCliente(Long id);
+	public void borrarCliente(Long id);
 }

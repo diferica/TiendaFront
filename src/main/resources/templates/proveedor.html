@@ -5,39 +5,65 @@
 <title>Insert title here</title>
 </head>
 <body>
-<header th:replace="plantilla/template:: header"></header>
+	<header th:replace="plantilla/template:: header"></header>
+	
+	<h1>Gestionar Proveedor</h1>
+	<div class="container">
+
+		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
+
+			<form method="post" class="form-inline" th:action="@{/cliente}"
+				th:object="${cliente}">
+
+				<div class="form-group">
+					<label for="nit">Nit :</label> <input type="text"
+						class="form-control" name="nit" id="nit">
+
+				</div>
+				<br>
+				<button type="submit" class="btn btn-primary">Buscar</button>
 
 
-<table class="table">
-				<thead>
-					<tr style="text-align: right;">
-						<th colspan="8"><a class="btn btn-success">Nuevo Proveedor</a> </th>
-					</tr>
-					<tr>
-						<th>#</th>
-						<th>Nit</th>
-						<th>Nombre</th>
-						<th>Direccion</th>
-						<th>Telefono</th>
-						<th colspan="2">Operaciones</th>
+			</form>
 
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="u:${proveedor}">
-						<td scope="row" th:text="${u.id}"></td>
-						<td th:text="${u.nit}"></td>
-						<td th:text="${u.nombre}"></td>
-						<td th:text="${u.direccion}"></td>
-						<td th:text="${u.telefono}"></td>
-						<td><a class="btn btn-danger"
-							th:href="@{/eliminarProveedor/}+${u.id}">Eliminar</a></td>
-						<td><a class="btn btn-success" th:href="@{/proveedor/}+${u.id}">Acutalizar</a></td>
-						
-					</tr>
-					</c:forEach>
-					
-				</tbody>
-			</table>
+
+		</div>
+		<br>
+
+		<table class="table">
+			<thead>
+				<tr style="text-align: right;">
+					<th colspan="8"><a class="btn btn-success">Nuevo Proveedor</a>
+					</th>
+				</tr>
+				<tr>
+					<th>#</th>
+					<th>Nit</th>
+					<th>Nombre</th>
+					<th>Direccion</th>
+					<th>Telefono</th>
+					<th colspan="2">Operaciones</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="u:${proveedor}">
+					<td scope="row" th:text="${u.id}"></td>
+					<td th:text="${u.nit}"></td>
+					<td th:text="${u.nombre}"></td>
+					<td th:text="${u.direccion}"></td>
+					<td th:text="${u.telefono}"></td>
+					<td><a class="btn btn-danger"
+						th:href="@{/eliminarProveedor/}+${u.id}">Eliminar</a></td>
+					<td><a class="btn btn-success"
+						th:href="@{/proveedor/}+${u.id}">Acutalizar</a></td>
+
+				</tr>
+				</c:forEach>
+
+			</tbody>
+		</table>
+
+	</div>
 </body>
 </html>
