@@ -50,6 +50,7 @@ public class Controlador {
 		if (result.hasErrors()) {
 			return "index";
 		}
+		
 		int validLogin = clienteTienda.login(loginDto);
 		if (validLogin == 1) {
 			return "menu";

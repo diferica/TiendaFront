@@ -2,6 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="plantilla/template:: head"></head>
 <body>
-<header th:replace="plantilla/template:: header"></header>
+	<header th:replace="plantilla/template:: header"></header>
+
+	<h1>Gestionar Clientes</h1>
+
+	<div class="container">
+
+		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
+
+			<form method="post"  class="form-inline" th:action="@{/cliente}" th:object="${cliente}">
+
+				<div class="form-group">
+					<label for="Usuario">Numero Documento :</label> <input type="text"
+						class="form-control" name="numeroDocumento" id="numeroDocumento">
+
+				</div>
+				<br>
+				<button type="submit" class="btn btn-primary">Buscar</button>
+				
+				
+			</form>
+			
+			
+		</div>
+		<br>
+			<table class="table">
+				<thead>
+					<tr style="text-align: right;">
+						<th colspan="8"><a class="btn btn-success">Nuevo Cliente</a> </th>
+					</tr>
+					<tr>
+						<th>#</th>
+						<th>Tipo documento</th>
+						<th>Numero</th>
+						<th>Nombre</th>
+						<th>Direccion</th>
+						<th>Email</th>
+						<th>Telefono</th>
+						<th colspan="2">Operaciones</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u:${clientes}">
+						<td scope="row" th:text="${u.id}"></td>
+						<td th:text="${u.idTipoDocumento.tipo}"></td>
+						<td th:text="${u.numeroDocumento}"></td>
+						<td th:text="${u.nombre}"></td>
+						<td th:text="${u.direccion}"></td>
+						<td th:text="${u.email}"></td>
+						<td th:text="${u.telefono}"></td>
+						<td><a class="btn btn-danger"
+							th:href="@{/eliminarCliente/}+${u.id}">Eliminar</a></td>
+						<td><a class="btn btn-success" th:href="@{/cliente/}+${u.id}">Acutalizar</a></td>
+						
+					</tr>
+					</c:forEach>
+					
+				</tbody>
+			</table>
+
+
+	</div>
+
 </body>
 </html>

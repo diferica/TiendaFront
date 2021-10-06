@@ -3,6 +3,7 @@ package com.mintic.tiendafront.dto;
 import javax.validation.constraints.NotEmpty;
 
 public class LoginDto {
+	
 	@NotEmpty(message="El nombre de usuario es obligatorio")
 	private String nombreUsuario;
 

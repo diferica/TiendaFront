@@ -5,19 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.mintic.tiendafront.client.ICliente;
+import com.mintic.tiendafront.client.IProveedor;
 
 @Controller
-public class ControladorCliente {
-	
+public class ControladorProveedor {
+
 	@Autowired
-	ICliente icliente;
+	IProveedor iproveedor;
 	
-	
-	@GetMapping("/cliente")
-	public String cliente(Model model) {
+	@GetMapping("/proveedor")
+	public String proveedor(Model model) {
 		
-		model.addAttribute("clientes", icliente.getCliente());
-		return "cliente";
+		model.addAttribute("proveedor", iproveedor.getProveedor());
+		return "proveedor";
 	}
 }
