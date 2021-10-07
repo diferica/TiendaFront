@@ -18,13 +18,12 @@ import com.mintic.tiendafront.dto.ClienteDocumento;
 import com.mintic.tiendafront.dto.ClienteResponse;
 import com.mintic.tiendafront.dto.Usuario;
 
-
 @Controller
 public class ControladorCliente {
 
 	@Autowired
 	ICliente icliente;
-	
+
 	@Autowired
 	IClientTienda clienteTienda;
 
@@ -50,41 +49,37 @@ public class ControladorCliente {
 
 	@GetMapping("/clienteNuevo")
 	public String clienteNuevo(Model model) {
-	
+
 		model.addAttribute("tipoDocumento", clienteTienda.getTipoDocumento());
 		model.addAttribute("clienteEditar", new ClienteResponse());
 		model.addAttribute("cliente", new Cliente());
-		
+
 		return "clienteNuevo";
 	}
-	
-	
+
 	@PostMapping("/cliente")
-	public String clienteCrear(Model model,@Valid @ModelAttribute Cliente cliente, BindingResult result) {
-	
+	public String clienteCrear(Model model, @Valid @ModelAttribute Cliente cliente, BindingResult result) {
+
 		model.addAttribute("tipoDocumento", clienteTienda.getTipoDocumento());
 		model.addAttribute("clienteEditar", new ClienteResponse());
 		
+
 		if (result.hasErrors()) {
 
 			return "clienteNuevo";
 		}
-		
+
 		icliente.nuevoCliente(cliente);
 		model.addAttribute("clientes", icliente.getCliente());
 		return "cliente";
 	}
-	
 
 	@GetMapping("/cliente/{id}")
 	public String actualizarUsuario(Model model, @PathVariable(name = "id") Long id) {
 		model.addAttribute("tipoDocumento", clienteTienda.getTipoDocumento());
 		model.addAttribute("cliente", new Cliente());
-		ClienteResponse clienteEditar =icliente.buscarCliente(id);
-		
-		System.out.println("-----"+clienteEditar.getNombre());
-		
-		
+		ClienteResponse clienteEditar = icliente.buscarCliente(id);
+
 		model.addAttribute("clienteEditar", clienteEditar);
 		return "clienteNuevo";
 	}
@@ -95,9 +90,5 @@ public class ControladorCliente {
 		model.addAttribute("clientes", icliente.getCliente());
 		return "cliente";
 	}
-	
-	
-	
-	
 
 }

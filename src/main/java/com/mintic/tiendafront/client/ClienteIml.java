@@ -74,7 +74,7 @@ public class ClienteIml implements ICliente {
 	public ClienteResponse buscarClienteDocumento(ClienteDocumento clienteDto) {
 		try {
 			Mono<ClienteResponse> response = webClient.build().post().uri(URL + "/cliente/documento")
-					.accept(MediaType.APPLICATION_JSON).body(Mono.just(clienteDto), LoginDto.class).retrieve()
+					.accept(MediaType.APPLICATION_JSON).body(Mono.just(clienteDto), ClienteResponse.class).retrieve()
 					.bodyToMono(ClienteResponse.class);
 
 			return response.block();

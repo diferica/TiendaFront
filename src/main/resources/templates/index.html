@@ -12,22 +12,22 @@
 
 				<div class=" col-xl-4 col-lg-3 col-md-4 col-sm-6" id="formulario">
 					<div class="form-group">
-						<label for="Usuario">Usuario</label> <input type="text"
-							class="form-control" name="nombreUsuario" id="Usuario"> <small
-							class="form-text text-danger"
-							th:if="${#fields.hasErrors('nombreUsuario')}"
-							th:errors="*{nombreUsuario}"></small>
+						<label for="Usuario">Usuario</label>	<input type="text" class="form-control" id="Usuario"
+							th:field="*{nombreUsuario}">
 
+						<div th:if="${#fields.hasErrors('nombreUsuario')}"
+							th:errors="*{nombreUsuario}" class="form-text text-danger"></div>
 					</div>
 
-					<div class="form-group">
+						<div class="form-group">
 						<label for="pwd">Password:</label> <input type="password"
-							class="form-control" name="password" id="pwd"> <small
-							class="form-text text-danger"
-							th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+							class="form-control" th:field="*{password}" id="pwd">
 
+
+						<div th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}" class="form-text text-danger"></div>
 					</div>
-					<p th:text="${error}"></p>
+					<p th:text="${error}"  class="form-text text-danger"></p>
 					<br>
 					<button type="submit" class="btn btn-primary">Ingresar</button>
 					<br> <br>

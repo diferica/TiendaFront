@@ -3,10 +3,14 @@ package com.mintic.tiendafront.client;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import com.mintic.tiendafront.dto.LoginDto;
 import com.mintic.tiendafront.dto.Proveedor;
+import com.mintic.tiendafront.dto.ProveedorNit;
 
 import reactor.core.publisher.Mono;
 
@@ -34,25 +38,62 @@ public class ProveedorImp implements IProveedor {
 
 	@Override
 	public Proveedor nuevoProveedor(Proveedor proveedorDto) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+
+			Mono<Proveedor> response = webClient.build().post().uri(URL + "/proveedor")
+					.body(Mono.just(proveedorDto), Proveedor.class).retrieve().bodyToMono(Proveedor.class);
+
+			return response.block();
+
+		} catch (WebClientResponseException e) {
+			e.getMessage();
+			System.out.println("---->" + e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public Proveedor buscarProveedor(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Mono<Proveedor> response = webClient.build().get().uri(URL + "/proveedor/" + id).retrieve()
+					.bodyToMono(Proveedor.class);
+
+			return response.block();
+		} catch (Exception e) {
+
+			return null;
+		}
+
 	}
 
 	@Override
-	public Proveedor buscarProveedorNit(Proveedor proveedorDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Proveedor buscarProveedorNit(ProveedorNit parametro) {
+		try {
+			Mono<Proveedor> response = webClient.build().post().uri(URL + "/proveedor/nit")
+					.accept(MediaType.APPLICATION_JSON).body(Mono.just(parametro), LoginDto.class).retrieve()
+					.bodyToMono(Proveedor.class);
+
+			return response.block();
+		} catch (Exception e) {
+
+			return null;
+		}
 	}
 
 	@Override
 	public int borrarProveedor(Long id) {
-		// TODO Auto-generated method stub
+		try {
+
+			Mono<Integer> response = webClient.build().delete().uri(URL + "/proveedor/" + id).retrieve()
+					.bodyToMono(Integer.class);
+
+			 response.block();
+
+		} catch (WebClientResponseException e) {
+			e.getMessage();
+			System.out.println("---->" + e.getMessage());
+			
+		}
 		return 0;
 	}
 

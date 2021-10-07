@@ -1,10 +1,128 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head">
+</head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+	$(window)
+			.on(
+					"load",
+					function() {
+
+						var i = 1;
+						$('#add')
+								.click(
+										function() {
+											let producto =$("#producto").val();
+											
+											if(producto.length>0){
+											
+											console.log(producto);
+											
+											i++;
+											$('#dynamic_field')
+													.append(
+															'<tr id="row'+i+'"><td><input type="text" name="idProducto[]" readonly/></td><td><input type="text" name="nombre[]" readonly/></td><td><input type="text" name="Cantidad[]" /></td><td><input type="text" name="valorUnitario[]" readonly/></td><td><input type="text" name="iva[]" readonly/></td><td><input type="text" name="valorTotal[]" readonly/></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+									
+											
+											$("#producto").val("");
+											
+											}else{
+												alert("producto invalido")
+												
+											}
+											});
+
+						$(document).on('click', '.btn_remove', function() {
+							var button_id = $(this).attr("id");
+							$('#row' + button_id + '').remove();
+						});
+
+					});
+</script>
+
 <body>
 
+	<header th:replace="plantilla/template:: header"></header>
+
+	<h1>Realizar ventas</h1>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="form-group">
+
+
+				<form name="venta" id="venta" method="post" th:action="@{/venta}">
+					<div class="table-responsive">
+
+
+
+
+						<table class="table table-bordered" id="dynamic_field">
+
+							<tr>
+								<td>Buscar Cliente</td>
+								<td><input type="text" name="cedula"
+									placeholder="Numero de documento"></td>
+								<td colspan="5"  style="text-align: left"><a href="#" class="btn btn-success">buscar
+										cliente</a></td>
+
+							</tr>
+
+							<tr>
+								<td>Nombre</td>
+								<td colspan="6"></td>
+							</tr>
+							<tr>
+								<td>Telefono</td>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr>
+								<td>Codigo Producto</td>
+								<td><input type="text" name="producto" id="producto" placeholder="Codigo"></td>
+								<td colspan="5" style="text-align: left"><a href="#" class="btn btn-success"
+									id="add">agregar producto</a></td>
+
+							</tr>
+
+
+							<!--<tr>
+								<td><input type="text" name="producto[]"
+									placeholder="Ingrese codigoProducto"
+									class="form-control name_list" /></td>
+
+
+
+								<td><button type="button" name="add" id="add"
+										class="btn btn-success">adicionar</button></td>
+							</tr>-->
+
+
+							<tr>
+
+								<td>Codigo</td>
+								<td>Nombre</td>
+								<td>cantidad</td>
+								<td>valor unitario</td>
+								<td>iva</td>
+								<td>valor total</td>
+								<td></td>
+
+							</tr>
+
+
+						</table>
+						<input type="submit" name="submit" id="submit"
+							class="btn btn-info" value="Guardar" />
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
 </body>
 </html>

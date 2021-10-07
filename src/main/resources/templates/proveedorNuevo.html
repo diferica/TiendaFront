@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="plantilla/template:: header"></header>
+	<div class="container">
+		<h1>Crear proveedor</h1>
+		<div class=" col-xl-2 col-lg-3 col-md-4 col-sm-6" id="formulario">
+			<form method="post" th:action="@{/proveedor}" th:object="${proveedor}">
+		
+
+				<div class="form-group">
+					<input type="hidden" name="id" th:value="${proveedorEditar.id}">
+
+					<label for="numero"> Numero:</label><input type="text"
+						name="nit" id="nit"
+						th:value="${proveedorEditar.nit}" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label>Nombre:</label><input type="text" name="nombre"
+						class="form-control" th:value="${proveedorEditar.nombre}" />
+				</div>
+				<div class="form-group">
+					<label>Direccion:</label><input type="text" name="direccion"
+						class="form-control" th:value="${proveedorEditar.direccion}" />
+				</div>
+
+				<div class="form-group">
+					<label>Email:</label><input type="text" name="ciudad"
+						class="form-control" th:value="${proveedorEditar.ciudad}" />
+				</div>
+
+				<div class="form-group">
+					<label>Telefono:</label><input type="text" name="telefono"
+						class="form-control" th:value="${proveedorEditar.telefono}" />
+				</div>
+
+
+				<br>
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</form>
+
+			<div th:object="${proveedor}" th:remove="tag">
+				<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+					role="alert">
+					<li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+				</ul>
+
+			</div>
+
+
+		</div>
+		<br> <br>
+
+	</div>
+</body>
+</html>

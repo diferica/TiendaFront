@@ -3,6 +3,7 @@ package com.mintic.tiendafront.client;
 import java.util.List;
 
 import com.mintic.tiendafront.dto.Proveedor;
+import com.mintic.tiendafront.dto.ProveedorNit;
 
 
 public interface IProveedor {
@@ -13,7 +14,7 @@ public interface IProveedor {
 
 	public Proveedor buscarProveedor(Long id);
 
-	public Proveedor buscarProveedorNit(Proveedor proveedorDto);
+	public Proveedor buscarProveedorNit( ProveedorNit parametro);
 
 	public int borrarProveedor(Long id);
 }
