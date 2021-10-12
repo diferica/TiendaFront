@@ -90,5 +90,15 @@ public class ControladorCliente {
 		model.addAttribute("clientes", icliente.getCliente());
 		return "cliente";
 	}
+	
+	@GetMapping("/reporteCliente")
+	public String reporteCliente (Model model) {
+		
+		model.addAttribute("clientes", icliente.getCliente());
+		return "reporteCliente";
+		
+	}
 
+	
+	
 }

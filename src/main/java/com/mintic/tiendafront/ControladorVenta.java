@@ -25,5 +25,12 @@ public class ControladorVenta {
 		
 		return "venta";
 	}
+	
+	
+	@GetMapping("/reporteVentas")
+	public String reporteVentas() {
+		
+		return "reporteVenta";
+	}
 
 }

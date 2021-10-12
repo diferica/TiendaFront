@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="plantilla/template:: header"></header>
+	<h1>reporte usuario</h1>
+	
+	<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Tipo documento</th>
+						<th>Numero</th>
+						<th>Nombre</th>
+						<th>Nombre usuario</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u:${usuarios}">
+						<td scope="row" th:text="${u.id}"></td>
+						<td th:text="${u.idTipoDocumento.tipo}"></td>
+						<td th:text="${u.numeroDocumento}"></td>
+						<td th:text="${u.nombre}"></td>
+						<td th:text="${u.nombreUsuario}"></td>
+							</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+	<a th:href="@{/reporte}" class="btn btn-danger">Regresar</a>
+</body>
+</html>

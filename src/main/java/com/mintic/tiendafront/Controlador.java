@@ -149,5 +149,19 @@ public class Controlador {
 
 		return ("producto");
 	}
+	
+	@GetMapping("/reporteUsuario")
+	public String reporteUsuario(Model model) {
+		
+		model.addAttribute("usuarios",clienteTienda.getUsuarios());
+		
+		return "reporteUsuario";
+	}
+	
+	
+	@GetMapping("/reporte")
+	public String reportes() {
+		return "reporte";
+	}
 
 }

@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head">
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-
+<header th:replace="plantilla/template:: header"></header>
+	
+	<table>
+		<tr>
+			<td><a  th:href="@{/reporteUsuario}" class="btn btn-success">Usuarios</a></td>
+		</tr>
+		
+		<tr>
+			<td><a  th:href="@{/reporteCliente}" class="btn btn-success">Clientes</a></td>
+		</tr>
+		
+		<tr>
+			<td><a th:href="@{/reporteVentas}"  class="btn btn-success">Ventas</a></td>
+		</tr>
+	</table>
 </body>
 </html>

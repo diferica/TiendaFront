@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template:: head">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<header th:replace="plantilla/template:: header"></header>
+	<h1>reporte Cliente</h1>
+	
+	
+		<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Tipo documento</th>
+						<th>Numero</th>
+						<th>Nombre</th>
+						<th>Direccion</th>
+						<th>Email</th>
+						<th>Telefono</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u:${clientes}">
+						<td scope="row" th:text="${u.id}"></td>
+						<td th:text="${u.idTipoDocumento.tipo}"></td>
+						<td th:text="${u.numeroDocumento}"></td>
+						<td th:text="${u.nombre}"></td>
+						<td th:text="${u.direccion}"></td>
+						<td th:text="${u.email}"></td>
+						<td th:text="${u.telefono}"></td>
+						
+					</tr>
+					</c:forEach>
+					
+				</tbody>
+			</table>
+
+</body>
+</html>
